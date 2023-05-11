@@ -18,13 +18,13 @@ function promptUser() {
         name: 'color',
         type: "list",
         message: "Please choose a color",
-        choices: ['blue','red','yellow','green']
+        choices: ['blue','red','yellow']
       },
       {
           name: "shape",
           type: 'list',
           message: "Please choose a shape",
-          choices: ['triangle','square','hexagon','circle']
+          choices: ['triangle','square','circle']
         },
     
     ])
@@ -32,14 +32,38 @@ function promptUser() {
       let logoColor;
       switch (color) {
         case "blue":
+            logoColor = '#0000FF'
           console.log('you chose blue')
           break;
 
-        case "car":
-          vehicle = new Car(wheels,vehicleColor);
+        case "red":
+          logoColor = '#FF0000'
           break;
 
+          case 'yelllow':
+          logoColor ='#ffff00'
+          break
+
       }
+
+      let logoShape;
+
+      switch (shape) {
+        case "square":
+            logoShape = 'square'
+          console.log('you chose blue')
+          break;
+
+        case "triangle":
+          logoShape = 'triangle'
+          break;
+
+          case 'circle':
+          logoShape ='circle'
+          break
+      }
+
+generateSVG(logoShape,logoColor,companyName)
     
     //  if(vehicleType=="boat"){
     //   return fs.writeFile("boat.html", vehicle.render());
@@ -52,4 +76,32 @@ function promptUser() {
 
 }
 
+
+
+function generateSVG(shape,color, name) {
+    let svgOutput
+    if (shape==='circle') {
+        svgOutput = `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle fill="${color}" cx="50" cy="50" r="50" />
+        <text x="20" y="35" class="small">${name}</text>
+        </svg>`
+    }
+    if(shape==='triangle') {
+        svgOutput = `<svg id="triangle" viewBox="0 0 100 100">
+        <polygon fill="${color}" points="50 15, 100 100, 0 100"/>
+        <text x="20" y="35" class="small">${name}</text>
+</svg>`
+    }
+    if(shape==='square') {
+        svgOutput = `<svg viewBox="0 0 220 100" xmlns="http://www.w3.org/2000/svg">
+        <rect fill="${color}" width="100" height="100" /></svg>
+        <text x="20" y="35" class="small">${name}</text> `
+    }
+        
+    console.log(svgOutput)
+
+}
+
 promptUser()
+
