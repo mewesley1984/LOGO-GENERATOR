@@ -5,6 +5,8 @@
 // Then test
 import inquirer from 'inquirer'
 
+import fs from 'fs'
+
 function promptUser() {
     inquirer
     .prompt([
@@ -90,14 +92,9 @@ function promptUser() {
           break
       }
 
-generateSVG(logoShape,logoColor,companyName,textColor)
+const svg = generateSVG(logoShape,logoColor,companyName,textColor)
     
-    //  if(vehicleType=="boat"){
-    //   return fs.writeFile("boat.html", vehicle.render());
-    //  }
-    //  if(vehicleType=="car"){
-    //   return fs.writeFile("car.html", vehicle.render());
-    //  }
+  fs.writeFile("logo.svg", svg, null, () => console.log('Success!'));
    
    })
 
@@ -110,23 +107,28 @@ function generateSVG(shape,color, name, textColor) {
     if (shape==='circle') {
         svgOutput = `
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle fill="${color}" cx="50" cy="50" r="50" />
-        <text x="20" y="35" style="fill:${textColor}">${name}</text>
+        <text x="50" y="50" text-anchor="middle" stroke="${textColor}" stroke-width="1px">${name}</text>    
+        <circle stroke="${color}" stroke-width="1px" fill="none" cx="50" cy="50" r="50">
+            
+            </circle>
         </svg>`
     }
     if(shape==='triangle') {
-        svgOutput = `<svg id="triangle" viewBox="0 0 100 100">
-        <polygon fill="${color}" points="50 15, 100 100, 0 100"/>
-        <text x="20" y="35" style="fill:${textColor}">${name}</text>
+        svgOutput = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <text x="50" y="50" text-anchor="middle" stroke="${textColor}" stroke-width="1px">${name}</text>  
+        <polygon style="fill:none;stroke:${color}; stroke-width:1px" points="50 15, 100 100, 0 100"/>
+       
 </svg>`
     }
     if(shape==='square') {
         svgOutput = `<svg viewBox="0 0 220 100" xmlns="http://www.w3.org/2000/svg">
-        <rect fill="${color}" width="100" height="100" /></svg>
-        <text x="20" y="35" style="fill:${textColor}">${name}</text> `
+        <text x="50" y="50" text-anchor="middle" stroke="${textColor}" stroke-width="1px">${name}</text>  
+        <rect stroke="${color}" stroke-width="1px" fill="none" width="100" height="100" /></svg>
+        `
     }
         
     console.log(svgOutput)
+    return svgOutput
 
 }
 
