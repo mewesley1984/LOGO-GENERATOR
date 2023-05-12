@@ -28,7 +28,7 @@ function promptUser() {
         name: 'color',
         type: "list",
         message: "Please choose a color for your shape",
-        choices: ['blue','red','yellow']
+        choices: ['green','purple','orange']
       },
       {
           name: "shape",
@@ -58,17 +58,17 @@ function promptUser() {
     
     
     switch (color) {
-        case "blue":
-            logoColor = '#0000FF'
+        case "orange":
+            logoColor = '#FFA500'
           console.log('you chose blue')
           break;
 
-        case "red":
-          logoColor = '#FF0000'
+        case "purple":
+          logoColor = '#800080'
           break;
 
-          case 'yelllow':
-          logoColor ='#ffff00'
+          case 'green':
+          logoColor ='#00FF00'
           break;
 
         default:
